@@ -18,11 +18,12 @@ event NewIDAdded(bytes32 _id, string _description);
 /*Functions*/
 //whitelist function for adding or open?
 
-function defineBytes32ID (string memory _description) 
+function defineBytes32ID (string memory _description, uint _granularity) 
 external 
 returns(bytes32 _id)
 {
-    _id = keccak256(_description)];
+	_id = keccak256(abi.encodePacked(_descrption, _granularity));
+    //_id = keccak256(_description)];
     bytesToString[_id] = _description;
     stringToBytes[_description]= _id;
     emit NewIDAdded(_id, _description);
