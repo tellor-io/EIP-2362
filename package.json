@@ -1,0 +1,22 @@
+{
+  "name": "eip-2362",
+  "version": "1.0.0",
+  "description": "Interface and mappings for eip-2362",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tellor-io/EIP-2362.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tellor-io/EIP-2362/issues"
+  },
+  "homepage": "https://github.com/tellor-io/EIP-2362#readme"
+}
