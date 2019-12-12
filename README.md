@@ -33,9 +33,6 @@ The pull-based interface specs:
 ```solidity
 interface Oracle {
 function resultFor(bytes32 id) external view returns (uint timestamp, int outcome, int status);
-function resultFor(bytes32 id) external view returns (uint timestamp,uint outcome, uint status);
-function resultFor(bytes32 id) external view returns (uint timestamp, uint[] outcome, uint[] status);
-function resultFor(bytes32 id) external view returns (uint timestamp, bytes32 outcome, uint status);
 }
 ```
 
