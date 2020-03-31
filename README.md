@@ -1,16 +1,14 @@
-# EIP-2362
-
-Pull Oracle Interface
+# EIP-2362: Pull Oracle Interface
 
 A standard interface for numeric pull oracles.
 
 ## Specification
 
-In general there are two different types of oracles, push and pull oracles. Where push oracles are expected to send back a response to the consumer and pull oracles allow consumers to pull or call/read the data onto their own systems. This specification is for pull based oracles only.
+In general there are two different types of oracles, push and pull oracles.
+Where push oracles are expected to send back a response to the consumer and pull oracles allow consumers to pull or call/read the data onto their own systems.
+This specification is for pull based oracles only.
 
-
-Definitions
-
+### Definitions
 
 <dl>
 <dt>Oracle</dt>
@@ -24,7 +22,6 @@ Definitions
 <dt>Report</dt>
 <dd>A pair (ID, result) which an oracle sends to an oracle consumer.</dd>
 </dl>
-
 
 ### Pull-based Interface
 
@@ -41,7 +38,7 @@ interface NumericOracle {
 
 If multiple values are stored, this interface should return the latest one.
 
-**Input:**
+#### Inputs
 
 - `id`: Description of the required value. Should be standard between all providers. *Proposition:* use the `keccak256` hash of a string describing the requested pair*
 	- keccak256("price-eth-usd") → 0x3d8553e168c60bf792b4d74a300ec5bb1d30bb361e76e6e0b718997770eba580
@@ -49,7 +46,7 @@ If multiple values are stored, this interface should return the latest one.
 	- keccak256("price-eth-btc") → 0x1011b9dea6eedbcd54e76d64617d5ff8543929ae5322f839bad4c01007185505
 	- ...
 
-**Output:**
+#### Outputs
 
 - `timestamp`: Timestamp (in the unix format, with is used by the EVM), of the associated to the returned value.
 - `value`: Latest value available for the requested `id`. To accomodate for decimal values (like prices) this should be multiplied by a big number such as `10**9` or `10**18`. This value should either be standardized as part of the EIP or be part of the `id` using format such as `keccak256("price-btc-usd-9")`.
