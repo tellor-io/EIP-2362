@@ -19,8 +19,6 @@ This specification is for pull based oracles only.
 <dd>A way of indexing the data which an oracle reports. May be derived from or tied to a question for which the data provides the answer.</dd>
 <dt>Value</dt>
 <dd>Data associated with an id which is reported by an oracle. This data oftentimes will be the answer to a question tied to the id. Other equivalent terms that have been used include: result, answer, data, outcome.</dd>
-<dt>Report</dt>
-<dd>A pair (ID, result) which an oracle sends to an oracle consumer.</dd>
 </dl>
 
 ### Pull-based Interface
