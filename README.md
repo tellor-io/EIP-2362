@@ -37,13 +37,29 @@ interface Eip2362Oracle {
 
 #### Inputs
 
-- `id`: Description of the required value. Should be standard between all providers. *Proposition:* use the `keccak256` hash of a string describing the requested pair*
-	- keccak256("price-eth-usd") → 0x3d8553e168c60bf792b4d74a300ec5bb1d30bb361e76e6e0b718997770eba580
-	- keccak256("price-btc-usd") → 0xaa42585bae5434c899dd8e4be37e1214661c793c1d1cc40a0ea63c9ef702517e
-	- keccak256("price-eth-btc") → 0x1011b9dea6eedbcd54e76d64617d5ff8543929ae5322f839bad4c01007185505
-	- ...
+##### `bytes32 id`
+
+A standard descriptor of the data point we are querying a value for.
+
+It is up to the implementor of an EIP-2362 compliant contract to decide which `id`s to support, i.e. for which `id`s will `valueFor` return a value and timestamp at some point, and for which it will always revert.
+
+These `id`s MUST however be uniform across all providers: multiple EIP-2362 compliant contracts can give different values and timestamps for the same `id`, but they must be referring to the same data point.
+	
+**TODO:** The specifics of how to generate or agree on the `id` of a data point have not been specified yet.
 
 #### Outputs
 
-- `timestamp`: Timestamp (in the unix format, with is used by the EVM), of the associated to the returned value.
-- `value`: Latest value available for the requested `id`. To accomodate for decimal values (like prices) this should be multiplied by a big number such as `10**9` or `10**18`. This value should either be standardized as part of the EIP or be part of the `id` using format such as `keccak256("price-btc-usd-9")`.
+##### `uint timestamp`
+
+Timestamp (in the Unix format as used by the EVM) associated to the returned value.
+
+It is up to the implementor of an EIP-2362 compliant contract to set the associated timestamp to one of these:
+   - the timestamp of the block in which the returned value was last mutated (by invoking `block.timestamp` or `now()` at the updating transaction).
+   - an oracle-specific timestamp that offers a more precise metric of when the reported value was actually probed.
+
+##### `int value`
+
+Latest value available for the requested `id`.
+
+To accommodate for decimal values (which are common in prices and rates) this is expected to be multiplied by a power of ten such as `10**9` or `10**18`.
+The specific power of ten MUST explicitly be stated by the `id` used as input.
