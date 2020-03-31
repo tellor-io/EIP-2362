@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 /*
- * @title Price/numberic Pull Oracle Interface
+ * @title Price/numeric Pull Oracle Interface
 */
 
 interface Eip2362OracleInterface {
