@@ -26,15 +26,14 @@ This specification is for pull based oracles only.
 The pull-based interface specs:
 
 ```solidity
-interface NumericOracle {
+interface Eip2362Oracle {
 	function valueFor(bytes32 id) external view returns (uint timestamp, int value);
 }
 ```
 
-`resultFor` MUST revert if the result for an `id` is not available yet.
-`resultFor` MUST return the same result for an `id` after that result is available.
-
-If multiple values are stored, this interface should return the latest one.
+- `valueFor` MUST revert if the value for an `id` is not available yet.
+- Once a value is first available for an `id`, `valueFor` MUST return the value, along the timestamp representing when such value was set.
+- May the value associated to an `id` be updated, `valueFor` MUST return the newest available value, along the timestamp representing when such update took place.
 
 #### Inputs
 
