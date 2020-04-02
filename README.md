@@ -1,16 +1,14 @@
-# EIP-2362
-
-Pull Oracle Interface
+# EIP-2362: Pull Oracle Interface
 
 A standard interface for numeric pull oracles.
 
 ## Specification
 
-In general there are two different types of oracles, push and pull oracles. Where push oracles are expected to send back a response to the consumer and pull oracles allow consumers to pull or call/read the data onto their own systems. This specification is for pull based oracles only.
+In general there are two different types of oracles, push and pull oracles.
+Where push oracles are expected to send back a response to the consumer and pull oracles allow consumers to pull or call/read the data onto their own systems.
+This specification is for pull based oracles only.
 
-
-Definitions
-
+### Definitions
 
 <dl>
 <dt>Oracle</dt>
@@ -19,37 +17,49 @@ Definitions
 <dd>A smart contract which receives or reads data from an oracle.</dd>
 <dt>ID</dt>
 <dd>A way of indexing the data which an oracle reports. May be derived from or tied to a question for which the data provides the answer.</dd>
-<dt>Result</dt>
-<dd>Data associated with an id which is reported by an oracle. This data oftentimes will be the answer to a question tied to the id. Other equivalent terms that have been used include: answer, data, outcome.</dd>
-<dt>Report</dt>
-<dd>A pair (ID, result) which an oracle sends to an oracle consumer.</dd>
+<dt>Value</dt>
+<dd>Data associated with an id which is reported by an oracle. This data oftentimes will be the answer to a question tied to the id. Other equivalent terms that have been used include: result, answer, data, outcome.</dd>
 </dl>
-
 
 ### Pull-based Interface
 
 The pull-based interface specs:
 
 ```solidity
-interface NumericOracle {
+interface Eip2362Oracle {
 	function valueFor(bytes32 id) external view returns (uint timestamp, int value);
 }
 ```
 
-`resultFor` MUST revert if the result for an `id` is not available yet.
-`resultFor` MUST return the same result for an `id` after that result is available.
+- `valueFor` MUST revert if the value for an `id` is not available yet.
+- Once a value is first available for an `id`, `valueFor` MUST return the value, along the timestamp representing when such value was set.
+- May the value associated to an `id` be updated, `valueFor` MUST return the newest available value, along the timestamp representing when such update took place.
 
-If multiple values are stored, this interface should return the latest one.
+#### Inputs
 
-**Input:**
+##### `bytes32 id`
 
-- `id`: Description of the required value. Should be standard between all providers. *Proposition:* use the `keccak256` hash of a string describing the requested pair*
-	- keccak256("price-eth-usd") → 0x3d8553e168c60bf792b4d74a300ec5bb1d30bb361e76e6e0b718997770eba580
-	- keccak256("price-btc-usd") → 0xaa42585bae5434c899dd8e4be37e1214661c793c1d1cc40a0ea63c9ef702517e
-	- keccak256("price-eth-btc") → 0x1011b9dea6eedbcd54e76d64617d5ff8543929ae5322f839bad4c01007185505
-	- ...
+A standard descriptor of the data point we are querying a value for.
 
-**Output:**
+It is up to the implementor of an EIP-2362 compliant contract to decide which `id`s to support, i.e. for which `id`s will `valueFor` return a value and timestamp at some point, and for which it will always revert.
 
-- `timestamp`: Timestamp (in the unix format, with is used by the EVM), of the associated to the returned value.
-- `value`: Latest value available for the requested `id`. To accomodate for decimal values (like prices) this should be multiplied by a big number such as `10**9` or `10**18`. This value should either be standardized as part of the EIP or be part of the `id` using format such as `keccak256("price-btc-usd-9")`.
+These `id`s MUST however be uniform across all providers: multiple EIP-2362 compliant contracts can give different values and timestamps for the same `id`, but they must be referring to the same data point.
+	
+**TODO:** The specifics of how to generate or agree on the `id` of a data point have not been specified yet.
+
+#### Outputs
+
+##### `uint timestamp`
+
+Timestamp (in the Unix format as used by the EVM) associated to the returned value.
+
+It is up to the implementor of an EIP-2362 compliant contract to set the associated timestamp to one of these:
+   - the timestamp of the block in which the returned value was last mutated (by invoking `block.timestamp` or `now()` at the updating transaction).
+   - an oracle-specific timestamp that offers a more precise metric of when the reported value was actually probed.
+
+##### `int value`
+
+Latest value available for the requested `id`.
+
+To accommodate for decimal values (which are common in prices and rates) this is expected to be multiplied by a power of ten such as `10**9` or `10**18`.
+The specific power of ten MUST explicitly be stated by the `id` used as input.
