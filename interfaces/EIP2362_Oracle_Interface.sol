@@ -5,5 +5,5 @@ pragma solidity >=0.5.3 <0.7.0;
 */
 
 interface Eip2362OracleInterface {
-    function valueFor(bytes32 id) external view returns (uint timestamp, int value);
+    function valueFor(bytes32 id) external view returns (uint timestamp, int value, int status);
 }
