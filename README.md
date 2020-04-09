@@ -27,7 +27,7 @@ The pull-based interface specs:
 
 ```solidity
 interface Eip2362Oracle {
-	function valueFor(bytes32 id) external view returns (uint timestamp, int value, int status);
+	function valueFor(bytes32 id) external view returns (uint timestamp, int value, uint status);
 }
 ```
 
@@ -78,7 +78,7 @@ Latest value available for the requested `id`.
 To accommodate for decimal values (which are common in prices and rates) this is expected to be multiplied by a power of ten such as `10**9` or `10**18`.
 The specific power of ten MUST explicitly be stated by the `id` used as input.
 
-##### `int status`
+##### `uint status`
 
 Describes the value's status. For consistency the statsus codes will corespond to the codes used for [HTTP](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) status codes 
 
