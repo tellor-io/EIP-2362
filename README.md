@@ -26,8 +26,10 @@ This specification is for pull based oracles only.
 The pull-based interface specs:
 
 ```solidity
-interface Eip2362Oracle {
-	function valueFor(bytes32 id) external view returns (uint timestamp, int value, uint status);
+
+interface IERC2362
+{
+	function valueFor(bytes32 _id) external view returns(int256 _value,uint256 _timestamp,uint256 _statusCode);
 }
 ```
 
