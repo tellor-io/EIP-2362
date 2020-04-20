@@ -52,16 +52,9 @@ A complet list is kept on Google doc [here](https://docs.google.com/spreadsheets
 
 | Description | ValuePair | DecimalPlaces | String           | Keccak256                                                        |
 |-------------|-----------|---------------|------------------|------------------------------------------------------------------|
-| Price       | USD/BTC   | 8             | Price-USD/BTC-8  | 2ecc80a3401165e1a04561d6ffe93662a31815d89cd63b00f248efd1cce47894 |
-| Price       | USD/ETH   | 18            | Price-USD/ETH-18 | 28f03153ea1b458348adcbca7c93d5063b0bd35b469f55ba2a02bb7e598a09fd |
-| Price       | EUR/ETH   | 18            | Price-EUR/ETH-18 | 4eed84fed518191e70583563ffc74c0c6de6c42b6692de62ef330718b389036d |
-| Price       | EUR/BTC   | 8             | Price-EUR/BTC-8  | 97a6e43c73c50883d7b0a0f4e42c3f4de4af3ef8a8660471c89eb1ccf5416a92 |
-| Price       | YEN/ETH   | 18            | Price-YEN/ETH-18 | 93c271043ed3be87a0480f8ebcbed7a550995d4908886e0ea0fe274e4e7c622c |
-| Price       | YEN/BTC   | 8             | Price-YEN/BTC-8  | 1ef758ca57c8d37eebb8db6b6b4106aed0da20706ca6cc2cda56590847942062 |
-| Price       | BTC/ETH   | 18            | Price-BTC/ETH-18 | ff146232e111e8d212b231c42ac6a77f8ce4e8e5a8350ca01803fc3cbdf948c0 |
-| Price       | ETH/TRB   | 18            | Price-ETH/TRB-18 | fe5666d1fc5979be3be77f2cb0bd1ea6e2a8677318bf2479b3d694458b9794c5 |
-| Price       | ETH/XMR   | 18            | Price-ETH/XMR-18 | f9bda91fcf6fa3ea13ed75b23dbbf88e8824f6672085fe75d99d224155bfba20 |
-| Index       | S&P500    | 2             | Index-S&P500-2   | 99b7a28e618edb96c18e4a3b619daf28f99542787b6772dd7862c6e9bb9781d2 |
+| Price       | ETH/USD   | 3             | Price-ETH/USD-3  | dfaa6f747f0f012e8f2069d6ecacff25f5cdf0258702051747439949737fc0b5 |
+| Price       | BTC/USD   | 3            | Price-BTC/USD-3 | 637b7efb6b620736c247aaa282f3898914c0bef6c12faff0d3fe9d4bea783020 |
+
 
 #### Outputs
 
