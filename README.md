@@ -4,7 +4,7 @@ A standard interface for numeric pull oracles.
 
 ## Specification
 
-In general there are two different types of oracles, push and pull oracles.
+In general, there are two different types of oracles, push and pull oracles.
 Where push oracles are expected to send back a response to the consumer and pull oracles allow consumers to pull or call/read the data onto their own systems.
 This specification is for pull based oracles only.
 
@@ -48,7 +48,7 @@ It is up to the implementor of an EIP-2362 compliant contract to decide which `i
 These `id`s MUST however be uniform across all providers: multiple EIP-2362 compliant contracts can give different values and timestamps for the same `id`, but they must be referring to the same data point.
 	
 Proposed Id generation fields: 
-A complet list is kept on Google doc [here](https://docs.google.com/spreadsheets/d/15TPUuPWrxh7eMGaJKIupOh6l5yG-abn8UJejVhHCWV8/edit?usp=sharing).
+A complete list is kept on Google doc [here](https://docs.google.com/spreadsheets/d/15TPUuPWrxh7eMGaJKIupOh6l5yG-abn8UJejVhHCWV8/edit?usp=sharing).
 
 | Description | ValuePair | DecimalPlaces | String           | Keccak256                                                        |
 |-------------|-----------|---------------|------------------|------------------------------------------------------------------|
@@ -75,7 +75,7 @@ The specific power of ten MUST explicitly be stated by the `id` used as input.
 
 ##### `uint status`
 
-Describes the value's status. For consistency the statsus codes will corespond to the codes used for [HTTP](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) status codes 
+Describes the value's status. For consistency, the status codes will correspond to the codes used for [HTTP](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) status codes 
 
 Status codes: 
 * 200 OK
